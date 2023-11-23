@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <h1>Projecte 1era Evaluació IAW</h1>
+    <h2>Jose Rodriguez i Nicolau Seguí</h2>
     <form method="post">
         <input type="submit" name="funcionalitat_1" value="funcionalitat_1" />
         <input type="submit" name="funcionalitat_2" value="funcionalitat_2" />
