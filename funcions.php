@@ -17,7 +17,13 @@ function mostra_videojocs($videojocs){
     echo "<table border='black'>";
     echo "<th>Nom</th><th>Desenvolupador</th><th>Plataforma</th><th>Llançament</th>";
     foreach ($videojocs as $videojoc){
-        
+        echo "<tr>";
+        foreach ($videojoc as $valor) {
+            echo "<td>$valor</td>";
+        }
+        echo "</tr>";
     }
-}
+
+    echo "</table>";
+    }
 ?>

@@ -13,5 +13,5 @@
 
 <?php
     require('funcions.php');
-    carrega_fitxer();
+    mostra_videojocs(carrega_fitxer());
 ?>
