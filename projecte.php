@@ -9,3 +9,7 @@
     
 </body>
 </html>
+
+<?php
+    echo "Hola jose";
+?>
