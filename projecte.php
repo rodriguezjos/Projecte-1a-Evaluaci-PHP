@@ -12,4 +12,5 @@
 
 <?php
     echo "Hola jose";
+    echo "Hola nicolau";
 ?>
