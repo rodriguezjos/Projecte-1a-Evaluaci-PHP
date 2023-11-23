@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1>Projecte 1era Evaluació IAW</h1>
+    <h2>Jose Rodriguez i Nicolau Seguí</h2>
 </body>
 </html>
 

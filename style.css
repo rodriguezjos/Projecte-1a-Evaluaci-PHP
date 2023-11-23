@@ -1,13 +1,17 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #add8e6; /* Baby Blue */
 }
 
 h1 {
     color: #333; /* Dark Gray */
+    text-align: center;
 }
 
+h2 {
+    color: #333; /* Dark Gray */
+    text-align: center;
+}
 /* Estilo para la tabla */
 table {
 width: 100%;
@@ -25,7 +29,7 @@ text-align: left;
 
 /* Estilo para las celdas de datos alternadas */
 tr:nth-child(even) {
-background-color: #f2f2f2;
+background-color: #add8e6;
 }
 
 /* Estilo para las celdas de datos */
