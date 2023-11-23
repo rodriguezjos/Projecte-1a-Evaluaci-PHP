@@ -24,7 +24,7 @@
 
     if(isset($_POST['funcionalitat_1'])) {
         mostra_videojocs(carrega_fitxer());
-        header("Location: {$_SERVER['projecte.php']}"); // Redirige a la misma página
+        header("Location: 'projecte.php'"); // Redirige a la misma página
         exit();
     } 
     if(isset($_POST['funcionalitat_2'])) {
