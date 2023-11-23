@@ -33,4 +33,8 @@ function mostra_videojocs($videojocs){
 
     echo "</table>";
     }
+
+    function assigna_codi(){
+        
+    }
 ?>
