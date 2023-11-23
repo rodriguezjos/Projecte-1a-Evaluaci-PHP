@@ -9,12 +9,7 @@
 </head>
 
 <body>
-    <h1>Projecte 1era Evaluació IAW</h1>
-    <h2>Jose Rodriguez i Nicolau Seguí</h2>
-    <form method='post'>
-        <input type='submit' name='funcionalitat_1' value='funcionalitat 1' />
-        <input type='submit' name='funcionalitat_2' value='funcionalitat 2' />
-    </form>
+
 </body>
 
 </html>
@@ -22,13 +17,13 @@
 <?php
     require('funcions.php');
 
-    if(isset($_POST['funcionalitat_1'])) {
+    imprimir_index();
+
+    if($_GET['funcionalitat'] == 1) {
         mostra_videojocs(carrega_fitxer());
-        header("Location: 'projecte.php'"); // Redirige a la misma página
-        exit();
     } 
-    if(isset($_POST['funcionalitat_2'])) {
-        echo "hola";
+    if($_GET['funcionalitat'] == 2) {
+        echo "<p>hola</p>";
     } 
 
 ?>
