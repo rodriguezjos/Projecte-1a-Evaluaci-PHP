@@ -11,6 +11,6 @@
 </html>
 
 <?php
-    echo "Hola jose";
-    echo "Hola nicolau";
+    require('funcions.php');
+    carrega_fitxer();
 ?>
