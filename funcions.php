@@ -2,14 +2,14 @@
 
 function imprimir_index(){
     echo "<h1>Projecte 1era Evaluació IAW</h1>
-    <h2>Jose Rodriguez i Nicolau Seguí</h2>
-    <form method='post'>
-        <input type='submit' name='funcionalitat_1' value='funcionalitat_1' />
-        <input type='submit' name=?funcionalitat_2' value='funcionalitat_2' />
-    </form>";
+    <h2>Jose Rodriguez i Nicolau Seguí</h2>";
+
+    echo "<a href='projecte.php'>Index</a>";
+    echo "<a href='projecte.php?funcionalitat=1'>Funcionalitat 1</a>";
+    echo "<a href='projecte.php?funcionalitat=2'>Funcionalitat 2</a>";
 }
 function carrega_fitxer(){
-    $jsonString = file_get_contents('games.json');
+    $jsonString = file_get_contents('prova.json');
 
     $arrayAsociatiu = json_decode($jsonString, true);
 
