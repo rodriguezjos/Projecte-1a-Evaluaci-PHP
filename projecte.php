@@ -23,7 +23,8 @@
         mostra_videojocs(carrega_fitxer());
     } 
     if($_GET['funcionalitat'] == 2) {
-        echo "<p>hola</p>";
+        $id_maxim = id_maxim(carrega_fitxer());
+        assigna_codi($id_maxim);
+        mostra_videojocs(carrega_fitxer());
     } 
-
 ?>
