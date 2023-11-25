@@ -30,5 +30,9 @@
     if($_GET['funcionalitat'] == 3) {
         eliminar_videojocs();
         mostra_videojocs(carrega_fitxer('JSON_Resultat_Eliminar.json'));
-    } 
+    }
+    if($_GET['funcionalitat'] == 4) {
+        data_expiracio();
+        //mostra_videojocs(carrega_fitxer('JSON_Resultat_Data_Expiració.json'));
+    }
 ?>

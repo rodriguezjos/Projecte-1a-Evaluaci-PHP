@@ -9,6 +9,7 @@ function imprimir_index()
     echo "<a href='projecte.php?funcionalitat=1'>Funcionalitat 1</a>";
     echo "<a href='projecte.php?funcionalitat=2'>Funcionalitat 2</a>";
     echo "<a href='projecte.php?funcionalitat=3'>Funcionalitat 3</a>";
+    echo "<a href='projecte.php?funcionalitat=4'>Funcionalitat 4</a>";
 }
 function carrega_fitxer($fitxer)
 {
@@ -108,6 +109,23 @@ function eliminar_videojocs()
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
             file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
         }
+    }
+}
+
+//NO afegeix els registres al json pero l'array esta modificat de forma correcta
+function data_expiracio()
+{
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+
+    foreach ($arrayAsociatiu as $columna => $valor) {
+        $data_expiracio = date('Y-m-d', strtotime($valor['Llançament'] . ' + 5 years'));
+        $array_expiracio = array('Data expiracio' => $data_expiracio);
+        $arrayAsociatiu = array_merge($valor, $array_expiracio);
+        print_r ($arrayAsociatiu);
+        echo "<br>";  
+        $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
+        file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);   
     }
 }
 ?>
