@@ -53,7 +53,7 @@ function id_maxim($videojocs)
 }
 
 
-//Queda arreglar que escrigui el nou ID a la posicio que toca al JSON
+//Queda arreglar que escrigui el nom de la columna 'ID: ' seguit del nou codi. Ara per ara imprimeix 'O: ' i el nou codi.
 function assigna_codi($id_maxim)
 {
     $jsonString = file_get_contents('prova.json');
@@ -61,7 +61,7 @@ function assigna_codi($id_maxim)
     foreach ($arrayAsociatiu as $columna => $valor) {
         if (!$arrayAsociatiu[$columna]['ID']) {
             $id_maxim++;
-            $arrayAsociatiu[$columna]['ID'] = $id_maxim;
+            array_unshift($arrayAsociatiu[$columna], $id_maxim);
             $newJsonString = json_encode($arrayAsociatiu,JSON_PRETTY_PRINT,JSON_INVALID_UTF8_IGNORE);
             file_put_contents('prova.json', $newJsonString);
         }
