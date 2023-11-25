@@ -20,11 +20,15 @@
     imprimir_index();
 
     if($_GET['funcionalitat'] == 1) {
-        mostra_videojocs(carrega_fitxer());
+        mostrar_videojocs(carrega_fitxer('games.json'));
     } 
     if($_GET['funcionalitat'] == 2) {
-        $id_maxim = id_maxim(carrega_fitxer());
+        $id_maxim = id_maxim(carrega_fitxer('prova.json'));
         assigna_codi($id_maxim);
-        mostra_videojocs(carrega_fitxer());
+        mostrar_videojocs(carrega_fitxer('prova.json'));
+    }
+    if($_GET['funcionalitat'] == 3) {
+        eliminar_videojocs();
+        mostra_videojocs(carrega_fitxer('JSON_Resultat_Eliminar.json'));
     } 
 ?>
