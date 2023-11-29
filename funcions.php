@@ -89,8 +89,9 @@ function assigna_codi($id_maxim)
     foreach ($arrayAsociatiu as $columna => $valor) {
         if (!$arrayAsociatiu[$columna]['ID']) {
             $id_maxim++;
-            array_unshift($arrayAsociatiu[$columna], $id_maxim);
-            $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT, JSON_INVALID_UTF8_IGNORE);
+            $arrayAsociatiu2 = array('ID:' => $id_maxim) + $arrayAsociatiu[$columna];
+            $arrayAsociatiu[$columna] = $arrayAsociatiu2;
+            $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
             file_put_contents('prova.json', $newJsonString);
         }
     }
@@ -99,14 +100,14 @@ function assigna_codi($id_maxim)
 
 function eliminar_videojocs()
 {
-    $date1 = "2017-03-02";
-    $date2 = "2017-03-04";
+    $date1 = "2015-05-19";
+    $date2 = "2018-10-26";
 
     $jsonString = file_get_contents('prova.json');
     $arrayAsociatiu = json_decode($jsonString, true);
 
     foreach ($arrayAsociatiu as $columna => $valor) {
-        if ($arrayAsociatiu[$columna]["Llançament"] > $date1 && $arrayAsociatiu[$columna]["Llançament"] < $date2) {
+        if ($arrayAsociatiu[$columna]["Llançament"] >= $date1 && $arrayAsociatiu[$columna]["Llançament"] <= $date2) {
             unset($arrayAsociatiu[$columna]);
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
             file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
