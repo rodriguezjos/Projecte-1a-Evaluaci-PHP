@@ -2,14 +2,16 @@
 
 function imprimir_index()
 {
-    echo "<h1>Projecte 1era Evaluació IAW</h1>
-    <h2>Jose Rodriguez i Nicolau Seguí</h2>";
+    echo "<header><h1>Projecte 1era Evaluació IAW</h1>
+    <h2>Jose Rodriguez i Nicolau Seguí</h2></header>";
+    
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php'\">Index</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=1'\">Funcionalitat 1</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=2'\">Funcionalitat 2</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=3'\">Funcionalitat 3</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=4'\">Funcionalitat 4</button>";
 
-    echo "<a href='projecte.php'>Index</a>";
-    echo "<a href='projecte.php?funcionalitat=1'>Funcionalitat 1</a>";
-    echo "<a href='projecte.php?funcionalitat=2'>Funcionalitat 2</a>";
-    echo "<a href='projecte.php?funcionalitat=3'>Funcionalitat 3</a>";
-    echo "<a href='projecte.php?funcionalitat=4'>Funcionalitat 4</a>";
+    
 }
 function carrega_fitxer($fitxer)
 {

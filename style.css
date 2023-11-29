@@ -1,3 +1,24 @@
+header {
+    background-color: black;
+    color: #add8e6;
+    padding: 10px; /* Añade un relleno para mejorar la apariencia */
+}
+
+.Boto {
+    /* Estilos para los botones */
+    background-color: #0080FF; /* Puedes cambiar esto al color que desees */
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.Boto:hover {
+    /* Cambia el color al pasar el ratón sobre el botón */
+    background-color: #0056b3; /* Puedes cambiar esto al color que desees */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -44,3 +65,4 @@ tr:hover {
 background-color: gold;
 transition: background-color 0.3s;
 }
+
