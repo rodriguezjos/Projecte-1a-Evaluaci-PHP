@@ -35,4 +35,7 @@
         data_expiracio();
         //mostra_videojocs(carrega_fitxer('JSON_Resultat_Data_Expiració.json'));
     }
+    if($_GET['funcionalitat'] == 5) {
+      comprovar_repetits();
+    }
 ?>

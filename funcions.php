@@ -10,7 +10,7 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=2'\">Funcionalitat 2</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=3'\">Funcionalitat 3</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=4'\">Funcionalitat 4</button>";
-
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=5'\">Funcionalitat 5</button>";
     
 }
 function carrega_fitxer($fitxer)
@@ -97,6 +97,7 @@ function assigna_codi($id_maxim)
     }
 }
 
+//NICO AIXO NA CRISTINA HA DIT QUE SES DATES S'HAN DE PASSAR PER PARAMETRE PER NO ELIMINAR SEMPRE ES MATEIXOS VIDEOJOCS
 
 function eliminar_videojocs()
 {
@@ -109,10 +110,10 @@ function eliminar_videojocs()
     foreach ($arrayAsociatiu as $columna => $valor) {
         if ($arrayAsociatiu[$columna]["Llançament"] >= $date1 && $arrayAsociatiu[$columna]["Llançament"] <= $date2) {
             unset($arrayAsociatiu[$columna]);
-            $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
-            file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
         }
     }
+    $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
+    file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
 }
 
 //NO afegeix els registres al json pero l'array esta modificat de forma correcta
@@ -131,4 +132,32 @@ function data_expiracio()
         file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);   
     }
 }
+
+function comprovar_repetits() {
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+    $elementsvists = [];
+    $repetits = false;
+
+    foreach ($arrayAsociatiu as $valor) {
+        $nom = $valor['Nom'];
+        if (in_array($nom, $elementsvists)) {
+            $repetits = true;
+            break;
+        }
+        else{
+            $elementsvists[] = $nom;
+        }
+    }
+    if($repetits == true){
+        print('<br>');
+        print('HI HA REPETITS');
+    }
+    else{
+        print('<br>');
+        print('NO HI HA REPETITS');
+    }
+}
+
+
 ?>

@@ -1,16 +1,16 @@
 header {
-    background-color: black;
-    color: #add8e6;
-    padding: 10px; 
+    background-color: navy;
+    padding: 20px;
 }
 
 .Boto {
-    background-color: #0080FF; 
+    background-color: navy; 
     color: white;
     padding: 10px 20px;
     margin: 5px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .Boto:hover {
@@ -18,18 +18,20 @@ header {
 }
 
 body {
+    
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     background-color: #add8e6;
 }
 
 h1 {
-    color: #333; 
+    color: white; 
     text-align: center;
 }
 
 h2 {
-    color: #333; 
+    color: white; 
     text-align: center;
 }
 
