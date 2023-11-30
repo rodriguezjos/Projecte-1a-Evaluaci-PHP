@@ -91,7 +91,7 @@ function assigna_codi($id_maxim)
             $id_maxim++;
             $arrayAsociatiu2 = array('ID:' => $id_maxim) + $arrayAsociatiu[$columna];
             $arrayAsociatiu[$columna] = $arrayAsociatiu2;
-            $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
+            $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents('prova.json', $newJsonString);
         }
     }
@@ -128,7 +128,7 @@ function data_expiracio()
         $arrayAsociatiu = array_merge($valor, $array_expiracio);
         print_r ($arrayAsociatiu);
         echo "<br>";  
-        $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
+        $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT,JSON_UNESCAPED_UNICODE);
         file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);   
     }
 }
