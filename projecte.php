@@ -38,4 +38,7 @@
     if($_GET['funcionalitat'] == 5) {
       comprovar_repetits();
     }
+    if($_GET['funcionalitat'] == 6) {
+        comprovar_repetits_ampliat();
+      }
 ?>

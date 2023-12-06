@@ -11,6 +11,7 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=3'\">Funcionalitat 3</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=4'\">Funcionalitat 4</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=5'\">Funcionalitat 5</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=6'\">Funcionalitat 6</button>";
     
 }
 function carrega_fitxer($fitxer)
@@ -158,6 +159,35 @@ function comprovar_repetits() {
         print('NO HI HA REPETITS');
     }
 }
+
+function comprovar_repetits_ampliat() {
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+    $elementsvists = [];
+    $repetits = [];
+
+    foreach ($arrayAsociatiu as $valor) {
+        $nom = $valor['Nom'];
+        if (in_array($nom, $elementsvists)) {
+            $repetits[] = $valor;  
+        } else {
+            $elementsvists[] = $nom;
+        }
+    }
+
+    if (!empty($repetits)) {
+        $JSON_RESULTAT_REPETITS = json_encode($repetits, JSON_PRETTY_PRINT);
+        file_put_contents('JSON_RESULTAT_REPETITS', $JSON_RESULTAT_REPETITS);
+
+        print('<br>');
+        print('ELEMENTS REPETITS GUARDATS DINS JSON_RESULTAT_REPETITS');
+    } else {
+        print('<br>');
+        print('NO HI HA REPETITS');
+    }
+}
+
+
 
 
 ?>
