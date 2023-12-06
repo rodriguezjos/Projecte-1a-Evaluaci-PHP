@@ -41,4 +41,7 @@
     if($_GET['funcionalitat'] == 6) {
         comprovar_repetits_ampliat();
       }
+      if($_GET['funcionalitat'] == 7) {
+        eliminar_repetits();
+      }
 ?>

@@ -12,7 +12,7 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=4'\">Funcionalitat 4</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=5'\">Funcionalitat 5</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=6'\">Funcionalitat 6</button>";
-    
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=7'\">Funcionalitat 7</button>";
 }
 function carrega_fitxer($fitxer)
 {
@@ -186,6 +186,36 @@ function comprovar_repetits_ampliat() {
         print('NO HI HA REPETITS');
     }
 }
+
+function eliminar_repetits() {
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+    $elementsvists = [];
+    $registresNoRepetits = [];
+
+    foreach ($arrayAsociatiu as $valor) {
+        $nom = $valor['Nom'];
+        if (in_array($nom, $elementsvists)) {
+
+        } else {
+            $elementsvists[] = $nom;
+            $registresNoRepetits[] = $valor;
+        }
+    }
+    
+    $jsonEliminarRepetits = json_encode($registresNoRepetits, JSON_PRETTY_PRINT);
+    file_put_contents('JSON_Eliminar_Registres_Repetits.json', $jsonEliminarRepetits);
+
+    if (!empty($registresNoRepetits)) {
+        print('<br>');
+        print('Se han guardado los registros sin elementos repetidos en "JSON_Eliminar_Registres_Repetits.json"');
+    } else {
+        print('<br>');
+        print('NO HI HA REPETITS');
+    }
+}
+
+
 
 
 
