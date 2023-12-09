@@ -84,7 +84,7 @@ function id_maxim($videojocs)
 
 function assigna_codi($id_maxim)
 {
-    $jsonString = file_get_contents('prova.json');
+    $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
     foreach ($arrayAsociatiu as $columna => $valor) {
         if (!$arrayAsociatiu[$columna]['ID']) {
@@ -92,7 +92,7 @@ function assigna_codi($id_maxim)
             $arrayAsociatiu2 = array('ID:' => $id_maxim) + $arrayAsociatiu[$columna];
             $arrayAsociatiu[$columna] = $arrayAsociatiu2;
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            file_put_contents('prova.json', $newJsonString);
+            file_put_contents('games.json', $newJsonString);
         }
     }
 }
