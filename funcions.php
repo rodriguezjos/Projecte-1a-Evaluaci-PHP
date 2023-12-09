@@ -242,8 +242,8 @@ function videojocs_antics_nous(){
     }
 
     if ($videojoc_antic !== null && $videojoc_recent !== null) {
-        $info_videojuegos = array('videojoc_antic' => $videojoc_antic, 'videojoc_recent' => $videojoc_recent);
-        $json_info = json_encode($info_videojuegos, JSON_PRETTY_PRINT);
+        $info_videojocs = array('videojoc_antic' => $videojoc_antic, 'videojoc_recent' => $videojoc_recent);
+        $json_info = json_encode($info_videojocs, JSON_PRETTY_PRINT);
         file_put_contents('JSON_RESULTAT_ANTIC_NOU', $json_info);
     } else {
         print("No s'han trobat dates valides");
