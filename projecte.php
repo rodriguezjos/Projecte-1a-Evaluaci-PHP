@@ -44,4 +44,8 @@
       if($_GET['funcionalitat'] == 7) {
         eliminar_repetits();
       }
+      if($_GET['funcionalitat'] == 8) {
+        videojocs_antics_nous();
+        mostra_videojocs(carrega_fitxer('JSON_RESULTAT_ANTIC_NOU'));
+      }
 ?>

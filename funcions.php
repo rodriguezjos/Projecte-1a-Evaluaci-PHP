@@ -13,6 +13,7 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=5'\">Funcionalitat 5</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=6'\">Funcionalitat 6</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=7'\">Funcionalitat 7</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=8'\">Funcionalitat 8</button>";
 }
 function carrega_fitxer($fitxer)
 {
@@ -205,14 +206,46 @@ function eliminar_repetits() {
 
     if (!empty($registresNoRepetits)) {
         print('<br>');
-        print('Se han guardado los registros sin elementos repetidos en "JSON_Eliminar_Registres_Repetits.json"');
+        print('REGISTRES SENSE REPETITS GUARDATS DINS "JSON_ELIMINAR_REGISTRES_REPETITS.JSON"');
     } else {
         print('<br>');
         print('NO HI HA REPETITS');
     }
 }
 
+function videojocs_antics_nous(){
+    $jsonString = file_get_contents('prova.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+    $dataantiga = PHP_INT_MAX; 
+    $datarecent = 0;
+    $videojoc_antic = null;
+    $videojoc_recent = null;
 
+    foreach ($arrayAsociatiu as $valor) {
+        $data = $valor['Llançament'];
+        if ($data) {
+            $timestamp_data = strtotime($data);
+
+            if ($timestamp_data < $dataantiga) {
+                $dataantiga = $timestamp_data;
+                $videojoc_antic = $valor;
+            }
+
+            if ($timestamp_data > $datarecent) {
+                $datarecent = $timestamp_data;
+                $videojoc_recent = $valor;
+            }
+        }
+    }
+
+    if ($videojoc_antic !== null && $videojoc_recent !== null) {
+        $info_videojuegos = array('videojoc_antic' => $videojoc_antic, 'videojoc_recent' => $videojoc_recent);
+        $json_info = json_encode($info_videojuegos, JSON_PRETTY_PRINT);
+        file_put_contents('JSON_RESULTAT_ANTIC_NOU', $json_info);
+    } else {
+        print("No s'han trobat dates valides");
+    }
+}
 
 
 
