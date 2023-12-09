@@ -89,7 +89,7 @@ function assigna_codi($id_maxim)
     foreach ($arrayAsociatiu as $columna => $valor) {
         if (!$arrayAsociatiu[$columna]['ID']) {
             $id_maxim++;
-            $arrayAsociatiu2 = array('ID:' => $id_maxim) + $arrayAsociatiu[$columna];
+            $arrayAsociatiu2 = array('ID' => $id_maxim) + $arrayAsociatiu[$columna];
             $arrayAsociatiu[$columna] = $arrayAsociatiu2;
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents('games.json', $newJsonString);
