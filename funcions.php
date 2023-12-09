@@ -4,7 +4,7 @@ function imprimir_index()
 {
     echo "<header><h1>Projecte 1era Evaluació IAW</h1>
     <h2>Jose Rodriguez i Nicolau Seguí</h2></header>";
-    
+
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php'\">Index</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=1'\">Funcionalitat 1</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=2'\">Funcionalitat 2</button>";
@@ -14,6 +14,8 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=6'\">Funcionalitat 6</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=7'\">Funcionalitat 7</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=8'\">Funcionalitat 8</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=9'\">Funcionalitat 9</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=10'\">Funcionalitat 10</button>";
 }
 function carrega_fitxer($fitxer)
 {
@@ -31,7 +33,7 @@ function carrega_fitxer($fitxer)
 function mostra_videojocs($videojocs)
 {
     echo "<table border='black'>";
-    echo "<th>ID</th><th>Nom</th><th>Desenvolupador</th><th>Plataforma</th><th>Llançament</th>";
+    echo "<th>Nom</th><th>Desenvolupador</th><th>Plataforma</th><th>Llançament</th><th>ID</th>";
     foreach ($videojocs as $videojoc) {
         echo "<tr>";
         foreach ($videojoc as $valor) {
@@ -89,7 +91,8 @@ function assigna_codi($id_maxim)
     foreach ($arrayAsociatiu as $columna => $valor) {
         if (!$arrayAsociatiu[$columna]['ID']) {
             $id_maxim++;
-            $arrayAsociatiu2 = array('ID' => $id_maxim) + $arrayAsociatiu[$columna];
+            $arrayAsociatiu2 = $arrayAsociatiu[$columna] + array('ID' => $id_maxim);
+            //$arrayAsociatiu2 = array('ID' => $id_maxim) + $arrayAsociatiu[$columna];
             $arrayAsociatiu[$columna] = $arrayAsociatiu2;
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents('games.json', $newJsonString);
@@ -104,7 +107,7 @@ function eliminar_videojocs()
     $date1 = "2015-05-19";
     $date2 = "2018-10-26";
 
-    $jsonString = file_get_contents('prova.json');
+    $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
 
     foreach ($arrayAsociatiu as $columna => $valor) {
@@ -112,7 +115,7 @@ function eliminar_videojocs()
             unset($arrayAsociatiu[$columna]);
         }
     }
-    $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT);
+    $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
 }
 
@@ -126,13 +129,14 @@ function data_expiracio()
         $data_expiracio = date('Y-m-d', strtotime($valor['Llançament'] . ' + 5 years'));
         $array_expiracio = $arrayAsociatiu[$columna] + array('Data expiracio' => $data_expiracio);
         $arrayAsociatiu[$columna] = $array_expiracio;
- 
+
         $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);   
+        file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);
     }
 }
 
-function comprovar_repetits() {
+function comprovar_repetits()
+{
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
     $elementsvists = [];
@@ -143,22 +147,21 @@ function comprovar_repetits() {
         if (in_array($nom, $elementsvists)) {
             $repetits = true;
             break;
-        }
-        else{
+        } else {
             $elementsvists[] = $nom;
         }
     }
-    if($repetits == true){
+    if ($repetits == true) {
         print('<br>');
         print('HI HA REPETITS');
-    }
-    else{
+    } else {
         print('<br>');
         print('NO HI HA REPETITS');
     }
 }
 
-function comprovar_repetits_ampliat() {
+function comprovar_repetits_ampliat()
+{
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
     $elementsvists = [];
@@ -167,7 +170,7 @@ function comprovar_repetits_ampliat() {
     foreach ($arrayAsociatiu as $valor) {
         $nom = $valor['Nom'];
         if (in_array($nom, $elementsvists)) {
-            $repetits[] = $valor;  
+            $repetits[] = $valor;
         } else {
             $elementsvists[] = $nom;
         }
@@ -175,14 +178,15 @@ function comprovar_repetits_ampliat() {
 
     if (!empty($repetits)) {
         $JSON_RESULTAT_REPETITS = json_encode($repetits, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents('JSON_RESULTAT_REPETITS', $JSON_RESULTAT_REPETITS);
+        file_put_contents('JSON_Resultat_repetits.json', $JSON_RESULTAT_REPETITS);
     } else {
         print('<br>');
         print('NO HI HA REPETITS');
     }
 }
 
-function eliminar_repetits() {
+function eliminar_repetits()
+{
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
     $elementsvists = [];
@@ -197,22 +201,25 @@ function eliminar_repetits() {
             $registresNoRepetits[] = $valor;
         }
     }
-    
+
     $jsonEliminarRepetits = json_encode($registresNoRepetits, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents('JSON_Eliminar_Registres_Repetits.json', $jsonEliminarRepetits);
 
     if (!empty($registresNoRepetits)) {
-     
+
     } else {
         print('<br>');
         print('NO HI HA REPETITS');
     }
 }
 
-function videojocs_antics_nous(){
-    $jsonString = file_get_contents('prova.json');
+//JOSE ARREGLA AQUESTA MERDA GRACIS
+
+function videojocs_antics_nous()
+{
+    $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
-    $dataantiga = PHP_INT_MAX; 
+    $dataantiga = PHP_INT_MAX;
     $datarecent = 0;
     $videojoc_antic = null;
     $videojoc_recent = null;
@@ -236,14 +243,50 @@ function videojocs_antics_nous(){
 
     if ($videojoc_antic !== null && $videojoc_recent !== null) {
         $info_videojocs = array('videojoc_antic' => $videojoc_antic, 'videojoc_recent' => $videojoc_recent);
-        $json_info = json_encode($info_videojocs, JSON_PRETTY_PRINT);
-        file_put_contents('JSON_RESULTAT_ANTIC_NOU', $json_info);
+        $json_info = json_encode($info_videojocs, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        file_put_contents('JSON_resultat_antic_nou.json', $json_info);
     } else {
         print("No s'han trobat dates valides");
     }
 }
 
+function ordenar_alfabeticament()
+{
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
+    asort($arrayAsociatiu);
+    $json_encode = json_encode(array_values($arrayAsociatiu), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    file_put_contents('JSON_Resultat_ordenat_alfabetic.json', $json_encode);
+}
 
+function juegos_por_año()
+{
+    $jsonString = file_get_contents('games.json');
+    $arrayAsociatiu = json_decode($jsonString, true);
 
+    // De nuevo ordenamos el array por fecha
+    usort($arrayAsociatiu, 'compararFechas');
+
+    // Guardamos todos los años de los videojuegos en el array $añoDeLanzamiento[]
+    foreach ($arrayAsociatiu as $videojuego) {
+        $fechalanzamiento = strtotime($videojuego['Llançament']);
+        $añoDeLanzamiento[] = date('Y', $fechalanzamiento);
+    }
+    // Contamos la cantidad veces que aparece cada año y la guardamos en un array asociativo
+    $frecuencia_elementos = array_count_values($añoDeLanzamiento);
+
+    echo "<ul >";
+    // Mostramos la información del array asociativo 
+    foreach ($frecuencia_elementos as $elemento => $frecuencia) {
+        echo "<li >Año: $elemento - Cantidad de videojuegos: $frecuencia</li>\n";
+    }
+    echo "</ul>";
+}
+
+function compararFechas($a, $b)
+{
+    // Comparamos las fechas
+    return strtotime($a['Llançament']) - strtotime($b['Llançament']);
+}
 
 ?>
