@@ -82,8 +82,6 @@ function id_maxim($videojocs)
     return $id_maxim;
 }
 
-
-//Queda arreglar que escrigui el nom de la columna 'ID: ' seguit del nou codi. Ara per ara imprimeix '0: ' i el nou codi.
 function assigna_codi($id_maxim)
 {
     $jsonString = file_get_contents('prova.json');
@@ -118,19 +116,18 @@ function eliminar_videojocs()
     file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
 }
 
-//NO afegeix els registres al json pero l'array esta modificat de forma correcta
 function data_expiracio()
 {
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
 
+
     foreach ($arrayAsociatiu as $columna => $valor) {
         $data_expiracio = date('Y-m-d', strtotime($valor['Llançament'] . ' + 5 years'));
-        $array_expiracio = array('Data expiracio' => $data_expiracio);
-        $arrayAsociatiu = array_merge($valor, $array_expiracio);
-        print_r ($arrayAsociatiu);
-        echo "<br>";  
-        $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT,JSON_UNESCAPED_UNICODE);
+        $array_expiracio = $arrayAsociatiu[$columna] + array('Data expiracio' => $data_expiracio);
+        $arrayAsociatiu[$columna] = $array_expiracio;
+ 
+        $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         file_put_contents('JSON_Resultat_Data_Expiració.json', $newJsonString);   
     }
 }
@@ -177,7 +174,7 @@ function comprovar_repetits_ampliat() {
     }
 
     if (!empty($repetits)) {
-        $JSON_RESULTAT_REPETITS = json_encode($repetits, JSON_PRETTY_PRINT);
+        $JSON_RESULTAT_REPETITS = json_encode($repetits, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         file_put_contents('JSON_RESULTAT_REPETITS', $JSON_RESULTAT_REPETITS);
 
         print('<br>');
@@ -204,7 +201,7 @@ function eliminar_repetits() {
         }
     }
     
-    $jsonEliminarRepetits = json_encode($registresNoRepetits, JSON_PRETTY_PRINT);
+    $jsonEliminarRepetits = json_encode($registresNoRepetits, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents('JSON_Eliminar_Registres_Repetits.json', $jsonEliminarRepetits);
 
     if (!empty($registresNoRepetits)) {
