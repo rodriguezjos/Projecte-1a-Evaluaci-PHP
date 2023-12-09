@@ -176,9 +176,6 @@ function comprovar_repetits_ampliat() {
     if (!empty($repetits)) {
         $JSON_RESULTAT_REPETITS = json_encode($repetits, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         file_put_contents('JSON_RESULTAT_REPETITS', $JSON_RESULTAT_REPETITS);
-
-        print('<br>');
-        print('ELEMENTS REPETITS GUARDATS DINS JSON_RESULTAT_REPETITS');
     } else {
         print('<br>');
         print('NO HI HA REPETITS');
@@ -205,8 +202,7 @@ function eliminar_repetits() {
     file_put_contents('JSON_Eliminar_Registres_Repetits.json', $jsonEliminarRepetits);
 
     if (!empty($registresNoRepetits)) {
-        print('<br>');
-        print('REGISTRES SENSE REPETITS GUARDATS DINS "JSON_ELIMINAR_REGISTRES_REPETITS.JSON"');
+     
     } else {
         print('<br>');
         print('NO HI HA REPETITS');

@@ -40,9 +40,11 @@
     }
     if($_GET['funcionalitat'] == 6) {
         comprovar_repetits_ampliat();
+        mostra_videojocs(carrega_fitxer('JSON_RESULTAT_REPETITS'));
       }
       if($_GET['funcionalitat'] == 7) {
         eliminar_repetits();
+        mostra_videojocs(carrega_fitxer('JSON_Eliminar_Registres_Repetits.json'));
       }
       if($_GET['funcionalitat'] == 8) {
         videojocs_antics_nous();
