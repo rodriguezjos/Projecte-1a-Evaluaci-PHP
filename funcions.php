@@ -153,10 +153,10 @@ function comprovar_repetits()
     }
     if ($repetits == true) {
         print('<br>');
-        print('HI HA REPETITS');
+        print('<p>HI HA REPETITS</p>');
     } else {
         print('<br>');
-        print('NO HI HA REPETITS');
+        print('<p> NO HI HA REPETITS </p>');
     }
 }
 

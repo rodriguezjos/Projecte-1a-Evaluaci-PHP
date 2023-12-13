@@ -12,7 +12,7 @@
 
 </body>
 
-</html>
+
 
 <?php
 require('funcions.php');
@@ -57,3 +57,11 @@ if ($_GET['funcionalitat'] == 9) {
   juegos_por_año();
 }
 ?>
+<br>
+<div class="img-container">
+  <img src="Projecte-1a-Evaluaci-PHP\img\php.gif" alt="GIF PHP">
+</div>
+
+</html>
+
+
