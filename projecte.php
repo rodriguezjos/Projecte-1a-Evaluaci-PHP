@@ -13,7 +13,6 @@
 </body>
 
 
-
 <?php
 require('funcions.php');
 
@@ -28,7 +27,9 @@ if ($_GET['funcionalitat'] == 2) {
   mostrar_videojocs(carrega_fitxer('games.json'));
 }
 if ($_GET['funcionalitat'] == 3) {
-  eliminar_videojocs();
+  $date1 = "2015-05-19";
+  $date2 = "2018-10-26";
+  eliminar_videojocs($date1, $date2);
   mostra_videojocs(carrega_fitxer('JSON_Resultat_Eliminar.json'));
 }
 if ($_GET['funcionalitat'] == 4) {
@@ -55,6 +56,9 @@ if ($_GET['funcionalitat'] == 9) {
   mostrar_videojocs(carrega_fitxer('JSON_Resultat_ordenat_alfabetic.json'));
 }if ($_GET['funcionalitat'] == 10) {
   juegos_por_año();
+}
+if ($_GET['funcionalitat'] == 11) {
+  eliminarFicherosJson();
 }
 ?>
 <br>
