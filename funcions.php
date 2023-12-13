@@ -157,10 +157,10 @@ function comprovar_repetits()
     }
     if ($repetits == true) {
         print('<br>');
-        print('HI HA REPETITS');
+        print('<p>HI HA REPETITS</p>');
     } else {
         print('<br>');
-        print('NO HI HA REPETITS');
+        print('<p>NO HI HA REPETITS</p>');
     }
 }
 
@@ -187,7 +187,7 @@ function comprovar_repetits_ampliat()
         file_put_contents('JSON_Resultat_repetits.json', $JSON_RESULTAT_REPETITS);
     } else {
         print('<br>');
-        print('NO HI HA REPETITS');
+        print('<p>NO HI HA REPETITS</p>');
     }
 }
 
@@ -217,7 +217,7 @@ function eliminar_repetits()
 
     } else {
         print('<br>');
-        print('NO HI HA REPETITS');
+        print('<p>NO HI HA REPETITS</p>');
     }
 }
 
