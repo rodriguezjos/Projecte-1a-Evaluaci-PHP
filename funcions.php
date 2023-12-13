@@ -1,5 +1,6 @@
 <?php
 
+// Funció que imprimeix per pantalla tots els botons per a cada funcionalitat i el header de la pàgina
 function imprimir_index()
 {
     echo "<header><h1>Projecte 1era Evaluació IAW</h1>
@@ -16,20 +17,23 @@ function imprimir_index()
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=8'\">Funcionalitat 8</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=9'\">Funcionalitat 9</button>";
     echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=10'\">Funcionalitat 10</button>";
+    echo "<button class='Boto' onclick=\"window.location.href='projecte.php?funcionalitat=11'\">Esborrar Jsons</button>";
 }
+
+//Aquesta funció carrega les dades del fitxer Json que li pasis per parametre, i crea un array associatiuamb les dades de cada registre.
 function carrega_fitxer($fitxer)
 {
     $jsonString = file_get_contents($fitxer);
 
     $arrayAsociatiu = json_decode($jsonString, true);
 
-    // Verifica si hay errores durante la decodificación
+    // Verifica si es produeixen errors durant la decodificació
     if (json_last_error() !== JSON_ERROR_NONE) {
         die('Error  JSON: ' . json_last_error_msg());
     }
     return $arrayAsociatiu;
 }
-
+//Aquesta funció imprimeix la taula de continguts inicial (les columnes son estatiques)
 function mostra_videojocs($videojocs)
 {
     echo "<table border='black'>";
@@ -44,7 +48,7 @@ function mostra_videojocs($videojocs)
 
     echo "</table>";
 }
-
+//Aquesta funció imprimeix la taula de continguts lletgint l'array per parametre (les columnes poden variar del arxiu original)
 function mostrar_videojocs($videojocs)
 {
     echo "<table border='black'>";
@@ -84,6 +88,7 @@ function id_maxim($videojocs)
     return $id_maxim;
 }
 
+//Afegeix a cada registre sense el parametre 'ID' un nou ID, respectant el ID màxim anterior(id_maxim)
 function assigna_codi($id_maxim)
 {
     $jsonString = file_get_contents('games.json');
@@ -92,7 +97,6 @@ function assigna_codi($id_maxim)
         if (!$arrayAsociatiu[$columna]['ID']) {
             $id_maxim++;
             $arrayAsociatiu2 = $arrayAsociatiu[$columna] + array('ID' => $id_maxim);
-            //$arrayAsociatiu2 = array('ID' => $id_maxim) + $arrayAsociatiu[$columna];
             $arrayAsociatiu[$columna] = $arrayAsociatiu2;
             $newJsonString = json_encode($arrayAsociatiu, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents('games.json', $newJsonString);
@@ -100,13 +104,10 @@ function assigna_codi($id_maxim)
     }
 }
 
-//NICO AIXO NA CRISTINA HA DIT QUE SES DATES S'HAN DE PASSAR PER PARAMETRE PER NO ELIMINAR SEMPRE ES MATEIXOS VIDEOJOCS
-
-function eliminar_videojocs()
+//funcio que elimina registres en funció de si es troben entre un període de temps determinat per 2 dades i guarda tots els registres no esborrats en
+//un nou json anomenat 'JSON_Resultat_Eliminar.json
+function eliminar_videojocs($date1, $date2)
 {
-    $date1 = "2015-05-19";
-    $date2 = "2018-10-26";
-
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
 
@@ -119,6 +120,8 @@ function eliminar_videojocs()
     file_put_contents("JSON_Resultat_Eliminar.json", $newJsonString);
 }
 
+//funció que afegeix una nova columna anomenada 'Data expiració' que equival a la data de llançament afegint 5 anys
+//el array amb la nova columna es guarda al arxiu 'JSON_Resultat_Data_Expiració.json'
 function data_expiracio()
 {
     $jsonString = file_get_contents('games.json');
@@ -135,6 +138,7 @@ function data_expiracio()
     }
 }
 
+//funció que comprova si existeixen registres repetits e imprimeix per pantalla una missatge indicant si hi ha repetits o si no n'hi ha
 function comprovar_repetits()
 {
     $jsonString = file_get_contents('games.json');
@@ -153,13 +157,15 @@ function comprovar_repetits()
     }
     if ($repetits == true) {
         print('<br>');
-        print('<p>HI HA REPETITS</p>');
+        print('HI HA REPETITS');
     } else {
         print('<br>');
-        print('<p> NO HI HA REPETITS </p>');
+        print('NO HI HA REPETITS');
     }
 }
 
+//funcio que comprova si existeixen registres repetits, afegeix els registres repetits al següent fitxer json: 'JSON_Resultat_repetits.json'
+// i els mostra per pantalla 
 function comprovar_repetits_ampliat()
 {
     $jsonString = file_get_contents('games.json');
@@ -185,6 +191,8 @@ function comprovar_repetits_ampliat()
     }
 }
 
+//funcio que elimina els registres repetits i guarda tots els registres que no estan repetits a un fitxer json 
+//anomenat: 'JSON_Eliminar_Registres_Repetits.json'
 function eliminar_repetits()
 {
     $jsonString = file_get_contents('games.json');
@@ -213,7 +221,7 @@ function eliminar_repetits()
     }
 }
 
-//JOSE ARREGLA AQUESTA MERDA GRACIS
+//funcio que mostra per pantalla el registres del videojocs mes antic i del mes nou
 
 function videojocs_antics_nous()
 {
@@ -250,6 +258,7 @@ function videojocs_antics_nous()
     }
 }
 
+//funcio que crea un json amb tots els registres ordenats de forma alfabèticament i el mostra per pantalla
 function ordenar_alfabeticament()
 {
     $jsonString = file_get_contents('games.json');
@@ -259,34 +268,52 @@ function ordenar_alfabeticament()
     file_put_contents('JSON_Resultat_ordenat_alfabetic.json', $json_encode);
 }
 
+//funcio que mostra per pantalla una llista on es mostra el número de videojocs que s'han publicat a cada any
 function juegos_por_año()
 {
     $jsonString = file_get_contents('games.json');
     $arrayAsociatiu = json_decode($jsonString, true);
 
-    // De nuevo ordenamos el array por fecha
+    //Ordenam el array per data
     usort($arrayAsociatiu, 'compararFechas');
 
-    // Guardamos todos los años de los videojuegos en el array $añoDeLanzamiento[]
     foreach ($arrayAsociatiu as $videojuego) {
         $fechalanzamiento = strtotime($videojuego['Llançament']);
         $añoDeLanzamiento[] = date('Y', $fechalanzamiento);
     }
-    // Contamos la cantidad veces que aparece cada año y la guardamos en un array asociativo
     $frecuencia_elementos = array_count_values($añoDeLanzamiento);
 
     echo "<ul >";
-    // Mostramos la información del array asociativo 
     foreach ($frecuencia_elementos as $elemento => $frecuencia) {
         echo "<li >Año: $elemento - Cantidad de videojuegos: $frecuencia</li>\n";
     }
     echo "</ul>";
 }
 
+//funcio que retorna la diferencia entre dues dates
 function compararFechas($a, $b)
 {
-    // Comparamos las fechas
     return strtotime($a['Llançament']) - strtotime($b['Llançament']);
+}
+
+//funcio que elimina tots els fitxers json que s'han creat degut a les funcionalitats
+function eliminarFicherosJson() {
+    // Obtenim els arxius json en el directori
+    $archivos = glob('./' . '/*.json');
+    // Iterar sobre la llista de arxius
+    foreach ($archivos as $archivo) {
+        // Obtenim el nom del arxiu
+        $nombreArchivo = basename($archivo);
+
+        // Verificar que el nom del arxiu no es 'games.json'
+        if ($nombreArchivo !== 'games.json') {
+            // Eliminam l'arxiu
+            unlink($archivo);
+            echo "S'ha esborrat l'arxiu: $nombreArchivo<br>";
+        }
+    }
+
+    echo "Procés completat.";
 }
 
 ?>
